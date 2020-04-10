@@ -29,7 +29,7 @@ int main(void)
 	DDRB |= 1<<STROBE; 		//set data direction for control pins (MSGEQ7)
 	DDRB |= 1<<RESET;
    
-	PORTB &= ~(1<<RESET); 	//reset pin low
+	PORTB &= ~(1<<RESET);	//reset pin low
 	PORTB |= 1<<STROBE; 	//strobe pin high
    
 	PORTB &= ~(1<<S0);		//clear select pins
@@ -44,12 +44,12 @@ int main(void)
 		
 		for (int i = 0; i < 7; i++)
 		{
-			 PORTB |= 1<<ENABLE; 																		 	//disable output of 74HC4051
-			 PORTB = (PORTB & 0b11000111) + ((i&0b001)<<S0) + ((i&0b010)<<(S1-1)) + ((i&0b100)<<(S2-2)); 	//set select pins counting up to 7 and clear select pins (bits 3 to 5)
-			 PORTB &= ~(1<<STROBE); 																	 	//strobe low --> get output from MSGEQ7
-			 _delay_us(36); 																				//output settling time
-			 PORTB &= ~(1<<ENABLE); 																		//enable output of 74HC4051
-			 PORTB |= 1<<STROBE; 																			//strobe high
+			 PORTB |= 1<<ENABLE; 																		 		//disable output of 74HC4051
+			 PORTB = (PORTB & 0b11000111) + ((i&0b001)<<S0) + ((i&0b010)<<(S1-1)) + ((i&0b100)<<(S2-2)); 		//set select pins counting up to 7 and clear select pins (bits 3 to 5)
+			 PORTB &= ~(1<<STROBE); 																	 		//strobe low --> get output from MSGEQ7
+			 _delay_us(36); 																					//output settling time
+			 PORTB &= ~(1<<ENABLE); 																			//enable output of 74HC4051
+			 PORTB |= 1<<STROBE; 																				//strobe high
 			 _delay_us(36); 
 		}
 	}
